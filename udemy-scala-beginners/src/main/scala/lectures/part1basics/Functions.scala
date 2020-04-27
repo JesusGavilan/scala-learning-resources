@@ -49,11 +49,14 @@ object Functions extends App {
   //4. Test if a number is prime
 
   def prime(n: Int): Boolean = {
+    // aux function
     def isPrimeUntil(t: Int): Boolean =
       if (t <= 1) true
       else n % t != 0 && isPrimeUntil(t-1)
     isPrimeUntil(n/2)
   }
   println(prime(37))
+
+
 
 }
