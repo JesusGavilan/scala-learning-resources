@@ -26,10 +26,11 @@ object PackagingAndImports {
   // Same name imports
   //1. ue FQ names or use aliasing
   val date = new Date
-  val sqlDate = new SQLDate(2018,5,4)
+  val sqlDate = new SqlDate(2018,5,4)
 
   // default imports
-  // java.lang - String, Object, Exception
+  // java.lang - String, Object, Exceptioned
+
   // Scala - Int, Nothing, Function
   // scala.Predef - println, ???
 
