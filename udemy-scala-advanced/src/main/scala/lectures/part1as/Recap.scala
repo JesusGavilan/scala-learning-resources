@@ -1,5 +1,7 @@
 package lectures.part1as
 
+import scala.annotation.tailrec
+
 object Recap extends App {
   val aCondition: Boolean = false
   val aConditionVal = if (aCondition) 42 else 65
