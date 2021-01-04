@@ -1,6 +1,6 @@
 package lectures.part4collections
 
-object operations extends App {
+object collections extends App {
   // 4.1 calculating the standard deviation of an array using scalla collection operations
   def stdDev(a: Array[Double]): Double = {
     val mean = a.sum / a.length
