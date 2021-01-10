@@ -1,6 +1,6 @@
-package exercises
+package exercises.extra
 
-import exercises.MyLinkedList.{append, drop, dropWhile, init, setHead, tail}
+import exercises.extra.MyLinkedList._
 
 import scala.annotation.tailrec
 
@@ -60,7 +60,7 @@ object MyLinkedList {
 }
 
 object playground extends App {
-  import exercises.MyLinkedList.sum
+  import MyLinkedList.sum
   val ex1 = MyLinkedList(1,2,3) match { case _ => 42}
   println(ex1)
   val ex2 = MyLinkedList(1,2,3) match { case Cons(h, _) => h}
