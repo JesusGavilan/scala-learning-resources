@@ -147,4 +147,20 @@ object FuturesPromises extends App {
   })
   producer.start()
   Thread.sleep(1000)
+
+  /*
+   1) fulfill a future INMEDIATELLY with a value
+   2) InSequence(fa, fb) -> two futures in sequence
+   3) first(fa, fb)  => new future with the first value of the two future
+   4) last(fa, fb) => new future with the last value
+   5) retryUntil(action: () => Future[T], condition: T => Boolean): Future[T]
+   */
+
+  //1.
+  def fulfillImmediately[T](value: T): Future[T] = Future(value)
+
+  //2. in sequence futures
+  def inSequence[A, B](first: Future[A], second: Future[B]): Future[B] =
+    first.flatMap(_ => second)
+
 }
