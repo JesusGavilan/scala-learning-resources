@@ -74,6 +74,7 @@ object TypeClasses extends App {
   trait Equal[T] {
     def compare(valueA: T, valueB: T): Boolean
   }
+
   object Equal {
     def apply[T](valueA: T, valueB: T)(implicit equalizer: Equal[T]): Boolean =
       equalizer.compare(valueA, valueB)
@@ -109,10 +110,9 @@ object TypeClasses extends App {
   println(HTMLSerializer[User].serialize(john))
 
   /*
-   Exercise: implement the TC for the Eqquality TC
+   Exercise: implement the Type Class  for the Equality TC
    */
   val anotherJohn = User("John", 45, "anotherjesus@xd.com")
-  println(Equal.apply(john, anotherJohn))
+  println(Equal(john, anotherJohn)) // AD-HOC polymorphism
 
-  // AD-HOC polymorphism
 }
