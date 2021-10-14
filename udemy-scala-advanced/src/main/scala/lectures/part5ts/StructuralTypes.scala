@@ -18,5 +18,4 @@ object StructuralTypes extends App {
 
   def closeQuietly(unifiedCloseable: UnifiedCloseable): Unit = unifiedCloseable.close()
 
-  closeQ
 }
