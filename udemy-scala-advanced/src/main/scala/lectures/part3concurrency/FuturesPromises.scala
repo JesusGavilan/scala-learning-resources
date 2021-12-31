@@ -13,7 +13,7 @@ object FuturesPromises extends App {
   }
   val aFuture = Future {
     calculateMeaningOfLife // calculates the meaning of life on ANOTHER thread
-  }                        // (global) which is passed by the compiler
+  } // (global) which is passed by the compiler
 
   println("Waiting on the future")
   aFuture.onComplete {
@@ -143,6 +143,7 @@ object FuturesPromises extends App {
     Thread.sleep(500)
     //"fullfiling" the promise
     promise.success(42)
+
     println("[producer] done")
   })
   producer.start()
@@ -162,5 +163,16 @@ object FuturesPromises extends App {
   //2. in sequence futures
   def inSequence[A, B](first: Future[A], second: Future[B]): Future[B] =
     first.flatMap(_ => second)
+
+  //3. first out of two futures
+  def first[A](fa: Future[A], fb: Future[A]): Future[A] = {
+    val promise = Promise[A]
+
+    fa.onComplete(promise.tryComplete)
+    fb.onComplete(promise.tryComplete)
+
+    promise.future
+  }
+  //4 - last out of the two futures
 
 }
