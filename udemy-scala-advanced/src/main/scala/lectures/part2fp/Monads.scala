@@ -52,7 +52,7 @@ object Monads extends App {
 
     Success(v).flatMap(x => f(x).flatMap(g)) =
     f(v).flatMap(g) OR Fail(e)
-    */
+   */
   val attempt = Attempt {
     throw new RuntimeException("My own monad, yes!")
   }
@@ -72,4 +72,30 @@ object Monads extends App {
       def map[B](f: T =
       }
    */
+  // 1 - Lazy monad
+  class Lazy[+A](value: => A) {
+    // call by need
+    private lazy val internalValue                = value
+    def use: A                                    = internalValue
+    def flatMap[B](f: (=> A) => Lazy[B]): Lazy[B] = f(internalValue)
+  }
+  object Lazy {
+    def apply[A](value: => A): Lazy[A] = new Lazy(value) //unit
+  }
+
+  val lazyInstance = Lazy {
+    println("Today I don't feel like doing anything")
+    42
+  }
+  val flatMappedInstance = lazyInstance.flatMap(x =>
+    Lazy {
+      10 * x
+  })
+  val flatMappedInstance2 = lazyInstance.flatMap(x =>
+    Lazy {
+      10 * x
+  })
+  flatMappedInstance.use
+  flatMappedInstance2.use
+
 }
