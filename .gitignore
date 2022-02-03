@@ -3,4 +3,5 @@ bin/
 project/
 target/
 build/
+*.bsp/
 *assignment.sbt
