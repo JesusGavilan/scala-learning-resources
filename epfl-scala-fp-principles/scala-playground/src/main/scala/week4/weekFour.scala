@@ -1,5 +1,7 @@
 package week4
 
+import java.sql.Date
+
 object weekFour extends App {
 
   /*
@@ -56,5 +58,49 @@ object weekFour extends App {
   println(show(expr))
   val expr1 = Prod(expr, Var("x"))
   println(show(expr1))
+
+  // Enums
+
+  enum DayOfWeek:
+    case Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+
+  import DayOfWeek.*
+
+  def isWeekend(day: DayOfWeek) =  day match
+    case Saturday | Sunday => true
+    case _ => false
+
+  enum Direction(val dx: Int, val dy: Int):
+    case Right extends Direction(1, 0)
+    case Up extends Direction(0,1)
+    case Left extends  Direction(-1, 0)
+    case Down extends Direction(0, -1)
+
+    def leftTurn = Direction.values((ordinal +1) %4)
+
+  val r = Direction.Right
+  val u = r.leftTurn
+  val v = (u.dx, u.dy)
+  // ENUMs a shorthand for hierarchies of case classes ADTs
+  // ADTs and enums are useful for domain modelling tasks.
+  // where one needs to define a large number of data types
+  // without attaching operations:
+  // modelling payment methods
+  enum PaymentMethod:
+    case CreditCard(kind: Card, holder: String, number: Long, expires: Date)
+    case PayPal(email: String)
+    case Cash
+
+  enum Card:
+    case Visa, Mastercard, Amex
+
+  //Variance
+  trait Fruit
+  class Apple extends Fruit
+  class Orange extends Fruit
+
+  type FtoO = Fruit => Orange
+  type AtoF = Apple => Fruit
+
 
 }
