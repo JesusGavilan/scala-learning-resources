@@ -19,19 +19,19 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
   }
 
   test("p02: testing the penultimate function") {
-    assert(penultimate(intList) == -8)
+    assert(penultimate(intList) == 8)
     assert(penultimate(strList) === "is")
     assert(penultimate(tupleList) === ("name", "Albert"))
 }
   test("p03: testing the nth function") {
-    assert(nth(4, intList) === 6)
+    assert(nth(4, intList) === 7)
     assert(nth(0, strList) === "my")
     assert(nth(1, tupleList) === ("name", "Albert"))
   }
   test("p04: testing length function") {
     assert(length(intList) === 7)
     assert(length(strList) === 4)
-    assert(length(tupleList) === 2)
+    assert(length(tupleList) === 3)
   }
   test("p05: testing reverse function") {
     assert(reverse(intList) === intList.reverse)
