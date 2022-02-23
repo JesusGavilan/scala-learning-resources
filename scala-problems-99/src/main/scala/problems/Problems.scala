@@ -80,4 +80,36 @@ object Problems {
   def encode[T](l: List[T]): List[(Int, T)] =
     pack(l).map(item => (item.length, item.head))
 
+  //11. Updated encoding a list by run-length
+  def encodeUpdated[T](l: List[T]): List[(Int, T)] = ???
+
+  //12. Decoding a encoded list by run-length
+  def decode[T](l: List[(Int, T)]): List[T] = ???
+
+  //13. Encoding a list by run-length, direct solution
+  def encodeDirect[T](l: List[T]): List[(Int, T)] = ???
+
+  //14. Duplicate elements of a list
+  def duplicate[T](l: List[T]): List[T] = ???
+
+  //15. Duplicate elements of a list N number of times
+  def duplicateN[T](n: Int, l: List[T]): List[T] = ???
+
+  //16. Drop every nth element of a list
+  def drop[T](n: Int, l:  List[T]): List[T] = ???
+
+  //17. Split a list in two parts
+  def split[T](n: Int, l: List[T]): List[T] = ???
+
+  //18. Extract a slice from a list
+  def slice[T](i: Int, k: Int, l: List[T]): List[T] = ???
+
+  //19. Rotate a list n places to the left
+  def rotate[T](n: Int, l: List[T]): List[T] = ???
+
+  //20. Remove the kth element from a list
+  def removeAt[T](k: Int, l: List[T]): List[T] = ???
+
+
+
 }
