@@ -1,7 +1,6 @@
 package problems
 
 import scala.annotation.tailrec
-
 object Problems {
 
   //1. Find the last element of a list
@@ -47,15 +46,38 @@ object Problems {
         case h :: tail => reverseAux(tail, h :: reverseLs)
     reverseAux(ls, Nil)
 
+  //6. Find out whether a list is a palindrome
+  def isPalindrome[T](l: List[T]): Boolean =
+    l == reverse(l)
 
-  def isPalindrome[T](l: List[T]): Boolean = ???
+  //7. Flatten a nested list
+  def flatten(l: List[Any]): List[Any] =
+    l match
+      case (head: List[_]) :: tail => flatten(head) ++ flatten(tail)
+      case head :: tail => head :: flatten(tail)
+      case Nil => Nil
 
-  def flatten[T](l: List[List[T]]): List[T] = ???
+  //8. Eliminate consecutive duplicates
+  def compress[T](l: List[T]): List[T] =
+    @tailrec
+    def compressAux(result: List[T], current: List[T]): List[T] =
+      current match
+        case head :: tail => compressAux(head :: result, tail.dropWhile(_ == head))
+        case Nil => result.reverse
+    compressAux(Nil, l)
 
-  def compress[T](l: List[T]): List[T] = ???
+  //9. Pack consecutive duplicates of list elements into sublist
+  def pack[T](l: List[T]): List[List[T]] =
+    @tailrec
+    def packAux(result: List[List[T]], current: List[T]): List[List[T]] =
+      current match
+        case head :: tail => packAux(current.filter(item => item == head) :: result, tail.dropWhile(_ == head))
+        case Nil => result.reverse
 
-  def pack[T](l: List[T]): List[List[T]] = ???
+    packAux(Nil, l)
 
-  def encode[T](l: List[T]): List[(Int, T)] = ???
+  //10. Encoding a list by run-length
+  def encode[T](l: List[T]): List[(Int, T)] =
+    pack(l).map(item => (item.length, item.head))
 
 }
