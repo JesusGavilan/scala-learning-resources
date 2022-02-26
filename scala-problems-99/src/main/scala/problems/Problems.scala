@@ -81,19 +81,37 @@ object Problems {
     pack(l).map(item => (item.length, item.head))
 
   //11. Updated encoding a list by run-length
-  def encodeUpdated[T](l: List[T]): List[(Int, T)] = ???
+  def encodeUpdated[T](l: List[T]): List[(Int, T)] =
+    encode(l).filter(item => item._1 > 1)
 
   //12. Decoding a encoded list by run-length
-  def decode[T](l: List[(Int, T)]): List[T] = ???
+  def decode[T](l: List[(Int, T)]): List[T] =
+    l.flatMap(item => List.fill(item._1)(item._2))
+
 
   //13. Encoding a list by run-length, direct solution
-  def encodeDirect[T](l: List[T]): List[(Int, T)] = ???
+  def encodeDirect[T](l: List[T]): List[(Int, T)] =
+    @tailrec
+    def encodeAux(result: List[(Int, T)], current: List[T]): List[(Int, T)] =
+      current match
+        case head :: tail => encodeAux((current.count(item => item == head) , head) :: result, tail.dropWhile(_ == head))
+        case Nil => result.reverse
+
+    encodeAux(Nil, l)
+
 
   //14. Duplicate elements of a list
-  def duplicate[T](l: List[T]): List[T] = ???
+  def duplicate[T](l: List[T]): List[T] =
+    l match
+      case head :: tail => head :: head :: duplicate(tail)
+      case Nil => Nil
+
 
   //15. Duplicate elements of a list N number of times
-  def duplicateN[T](n: Int, l: List[T]): List[T] = ???
+  def duplicateN[T](n: Int, l: List[T]): List[T] =
+    l match
+      case head :: tail => List.fill(n)(head) ++ duplicateN(n, tail)
+      case Nil => Nil
 
   //16. Drop every nth element of a list
   def drop[T](n: Int, l:  List[T]): List[T] = ???

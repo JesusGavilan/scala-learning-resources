@@ -67,9 +67,12 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
   }
   test("p14: testing duplicate function") {
     assert(duplicate(strListRepeated) === List("m","m","m","m","m","m","t","t","o","o","o","o","o","o","y","y","p","p","p","p","p","p","p","p","a","a"))
+    assert(duplicate(intList) === List(1, 1, 3, 3, 5, 5, 6, 6, 7, 7, 8, 8, -9, -9))
   }
   test("p15: testing duplicate n elements function") {
-    assert(duplicateN(2, intList) === List(1,1, 3,3, 5, 5, 6, 6, 7, 7, 8, 8, -9, -9))
+    assert(duplicateN(2, intList) === List(1, 1, 3, 3, 5, 5, 6, 6, 7, 7, 8, 8, -9, -9))
+    assert(duplicateN(3, intListOfInts) === List(List(1,3,5),List(1,3,5),List(1,3,5), List(6,7),List(6,7),List(6,7), List(8,-9), List(8,-9), List(8,-9)))
+    assert(duplicateN(50, Nil) === Nil)
   }
   test("p16: testing dropN function") {
     assert(drop(3, strListRepeated) === List("m","m","t","o","o","y","p","p","a"))
