@@ -114,7 +114,17 @@ object Problems {
       case Nil => Nil
 
   //16. Drop every nth element of a list
-  def drop[T](n: Int, l:  List[T]): List[T] = ???
+  def drop[T](n: Int, l:  List[T]): List[T] =
+    @tailrec
+    def dropAux(inc: Int, current: List[T], result: List[T]): List[T] =
+      current match
+        case head :: tail => {
+          if (inc == n) dropAux(1, tail, head :: result)
+          else dropAux(inc + 1 , tail, result)
+        }
+        case Nil => Nil
+        
+    dropAux(1, l, Nil)    
 
   //17. Split a list in two parts
   def split[T](n: Int, l: List[T]): List[T] = ???
