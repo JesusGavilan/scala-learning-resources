@@ -118,16 +118,25 @@ object Problems {
     @tailrec
     def dropAux(inc: Int, current: List[T], result: List[T]): List[T] =
       current match
-        case head :: tail => {
-          if (inc == n) dropAux(1, tail, head :: result)
-          else dropAux(inc + 1 , tail, result)
-        }
-        case Nil => Nil
+        case head :: tail =>
+          if (inc == n) dropAux(1, tail, result)
+          else dropAux(inc + 1 , tail, head :: result)
+        case Nil => result.reverse
         
-    dropAux(1, l, Nil)    
+    dropAux(1, l, Nil)
 
   //17. Split a list in two parts
-  def split[T](n: Int, l: List[T]): List[T] = ???
+  def split[T](n: Int, l: List[T]): (List[T], List[T]) =
+    def splitAux(inc: Int, currentList: List[T], currentHead: List[T]): (List[T], List[T]) =
+      (inc, currentList) match
+        case (_, Nil) => (currentHead.reverse, Nil)
+        case (valInc, head :: tail) => {
+          if (valInc < n) splitAux(inc + 1 , tail, head :: currentHead)
+          else (currentHead.reverse, head :: tail)
+        }
+
+    splitAux(0, l, Nil)
+
 
   //18. Extract a slice from a list
   def slice[T](i: Int, k: Int, l: List[T]): List[T] = ???

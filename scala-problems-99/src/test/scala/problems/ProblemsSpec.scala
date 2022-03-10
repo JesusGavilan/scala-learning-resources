@@ -78,7 +78,8 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
     assert(drop(3, strListRepeated) === List("m","m","t","o","o","y","p","p","a"))
   }
   test("p17: testing split function") {
-    assert(split(3, strListRepeated) === List(List("m","m","m"),List("t","o","o"),List("o","y","p"),List("p","p","p"),List("a")))
+    assert(split(3, strListRepeated) === (List("m","m","m"), List("t","o","o","o","y","p","p","p","p","a")))
+    assert(split(0, List("z")) === (List(), List("z")))
   }
   test("p18: testing slice function") {
     assert(slice(5,9, strListRepeated) === List("o","o","y"))
