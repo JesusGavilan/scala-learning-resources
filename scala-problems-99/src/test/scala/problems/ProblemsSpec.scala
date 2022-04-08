@@ -91,6 +91,22 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
   test("p20: testing remove the kth element of a list function") {
     assert(removeAt(4, intList) === (List(1, 3, 5, 6, 8, -9), 7))
   }
+  test("p21: testing insertAt function") {
+    assert(insertAt(100, 2, intList) === (List(1, 100, 3, 5, 6, 7, 8, -9), 7))
+  }
+  test("p22: testing range function") {
+    assert(range(6,11) == List(6,7,8,9,10,11))
+  }
+  test("p23: testing random function") {
+    assert(random(2, intList).length === 2)
+  }
+  test("p24: testing lotto function") {
+    assert(lotto(3, intList).length === 3)
+  }
+  test("p25: testing randomPermute function") {
+    assert(randomPermute(strList).length === 4)
+  }
+
 
 
 
