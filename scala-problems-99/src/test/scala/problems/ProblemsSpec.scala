@@ -13,7 +13,7 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
   val tupleList = List(("city", "Barcelona"), ("name", "Albert"), ("age", "43"))
 
   test("p01: testing the last function") {
-    assert(last(intList) == -9)
+    assert(last(intList) === -9)
     assert(last(strList) === "Jonas")
     assert(last(tupleList) === ("age", "43"))
   }
@@ -83,12 +83,13 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
   }
   test("p18: testing slice function") {
     assert(slice(5,9, strListRepeated) === List("o","o","y"))
+    assert(slice(0,5, List(3,5,9,8)) === List(3,5,9,8))
   }
   test("p19: testing rotate left function") {
     assert(rotate(5, strListRepeated) === List("o","o","y","p","p","p","p","a","m","m","m","t","o"))
   }
   test("p20: testing remove the kth element of a list function") {
-    assert(removeAt(4, strListRepeated) === List(1, 3, 5, 6, 8, -9))
+    assert(removeAt(4, intList) === (List(1, 3, 5, 6, 8, -9), 7))
   }
 
 

@@ -1,6 +1,7 @@
 package problems
 
 import scala.annotation.tailrec
+import scala.reflect.ClassManifestFactory.{Any, Nothing}
 object Problems {
 
   //1. Find the last element of a list
@@ -139,14 +140,32 @@ object Problems {
 
 
   //18. Extract a slice from a list
-  def slice[T](i: Int, k: Int, l: List[T]): List[T] = ???
+  def slice[T](i: Int, k: Int, l: List[T]): List[T] =
+    @tailrec
+    def sliceAux(inc: Int, result: List[T], currentList: List[T]): List[T] =
+      (result, currentList) match
+        case (res, Nil) => res.reverse
+        case (res, head :: tail) =>
+          if (inc > i && inc < k) sliceAux(inc + 1, head :: res, tail)
+          else sliceAux(inc + 1 , res, tail)
+    sliceAux(1, Nil, l)
 
   //19. Rotate a list n places to the left
-  def rotate[T](n: Int, l: List[T]): List[T] = ???
+  def rotate[T](n: Int, l: List[T]): List[T] =
+    val nbis = if (l.isEmpty) 0 else n % l.length
+    if (nbis < 0) rotate(l.length + n, l)
+    else l.drop(nbis):::l.take(nbis)
 
   //20. Remove the kth element from a list
-  def removeAt[T](k: Int, l: List[T]): List[T] = ???
-
-
+  def removeAt[T](k: Int, l: List[T]): (List[T], T) =
+    if (k < 0) throw new NoSuchElementException
+    else (k, l) match {
+      case (_, Nil) => throw new NoSuchElementException
+      case (0, head :: tail) => (tail, head)
+      case (_, head :: tail) => {
+        val (t, e) = removeAt(k -1, l.tail)
+        (l.head :: t, e)
+      }
+    }
 
 }
