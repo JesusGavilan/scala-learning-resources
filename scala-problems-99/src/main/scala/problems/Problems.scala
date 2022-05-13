@@ -172,7 +172,17 @@ object Problems {
     }
   
   //21. Insert an element at a given position into a list
-  def insertAt[T](v: T, i: Int, l: List[T]): List[T] = ???
+  def insertAt[T](v: T, i: Int, l: List[T]): List[T] =
+    if (i > l.length) throw new NoSuchElementException
+    def insertAux(inc: Int, currentList: List[T]): List[T] =
+      (inc, currentList) match
+        case (ix, head :: tail) =>
+          if (ix == i) v :: head :: tail
+          else head :: insertAux(ix + 1, tail)
+        case (_, Nil) => Nil
+
+    insertAux(0, l)
+
 
   //22. Create a list containing all integers within a given range
   def range[T](start: Int, end: Int): List[Int] = ???

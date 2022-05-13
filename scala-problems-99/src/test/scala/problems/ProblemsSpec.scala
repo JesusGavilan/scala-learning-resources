@@ -92,7 +92,8 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
     assert(removeAt(4, intList) === (List(1, 3, 5, 6, 8, -9), 7))
   }
   test("p21: testing insertAt function") {
-    assert(insertAt(100, 2, intList) === (List(1, 100, 3, 5, 6, 7, 8, -9), 7))
+    assert(insertAt(100, 2, intList) === (List(1, 3, 100, 5, 6, 7, 8, -9)))
+    assert(insertAt("hola", 4, List(1,5,6,8,-2,34,"M")) === (List(1,5,6,8,"hola",-2,34,"M")))
   }
   test("p22: testing range function") {
     assert(range(6,11) == List(6,7,8,9,10,11))
