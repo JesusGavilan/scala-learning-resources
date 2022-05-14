@@ -97,12 +97,13 @@ class ProblemsSpec extends AnyFunSuite with BeforeAndAfter :
   }
   test("p22: testing range function") {
     assert(range(6,11) == List(6,7,8,9,10,11))
+    assert(range(-3, 3) == List(-3,-2,-1,0,1,2,3))
   }
   test("p23: testing random function") {
     assert(random(2, intList).length === 2)
   }
   test("p24: testing lotto function") {
-    assert(lotto(3, intList).length === 3)
+    assert(lotto(3, 10).length === 3)
   }
   test("p25: testing randomPermute function") {
     assert(randomPermute(strList).length === 4)

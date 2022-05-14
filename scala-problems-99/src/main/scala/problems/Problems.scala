@@ -2,6 +2,7 @@ package problems
 
 import scala.annotation.tailrec
 import scala.reflect.ClassManifestFactory.{Any, Nothing}
+import scala.util.Random
 object Problems {
 
   //1. Find the last element of a list
@@ -185,13 +186,29 @@ object Problems {
 
 
   //22. Create a list containing all integers within a given range
-  def range[T](start: Int, end: Int): List[Int] = ???
+  def range[T](start: Int, end: Int): List[Int] =
+    if (start > end) throw new IllegalArgumentException
+    else if (start == end) end :: Nil
+    else start :: range(start + 1, end )
 
   //23. Extract a given number of randomly selected elements from a list
-  def random[T](v: Int, l: List[T]): List[T] = ???
+  def random[T](v: Int, l: List[T]): List[T] =
+    def randomAux(inc: Int, currentList: List[T]): List[T] =
+      if (inc == v) Nil
+      else {
+        val (reducedList, value) = removeAt(Random.nextInt(currentList.length), currentList)
+        value :: randomAux(inc + 1, reducedList)
+      }
+    randomAux(0, l)
+
 
   //24. Draw N different random numbers from the set 1..M.
-  def lotto(n: Int, l: List[Int]): List[Int] = ???
+  def lotto(n: Int, m: Int): List[Int] =
+    def lottoAux(inc: Int): List[Int] =
+      if (inc == n) Nil
+      else Random.nextInt(m) :: lottoAux(inc + 1)
+    lottoAux(0)
+
 
   //25. Generate a random permutation of the elements of a list
   def randomPermute[T](l: List[T]): List[T] = ???
